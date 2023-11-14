@@ -1,0 +1,45 @@
+<.header>
+  Listing Couriers
+  <:actions>
+    <.link patch={~p"/couriers/new"}>
+      <.button>New Courier</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="couriers"
+  rows={@streams.couriers}
+  row_click={fn {_id, courier} -> JS.navigate(~p"/couriers/#{courier}") end}
+>
+  <:col :let={{_id, courier}} label="Name"><%= courier.name %></:col>
+  <:col :let={{_id, courier}} label="Phone"><%= courier.phone %></:col>
+  <:col :let={{_id, courier}} label="State"><%= courier.state %></:col>
+  <:col :let={{_id, courier}} label="City"><%= courier.city %></:col>
+  <:col :let={{_id, courier}} label="Company"><%= courier.company %></:col>
+  <:action :let={{_id, courier}}>
+    <div class="sr-only">
+      <.link navigate={~p"/couriers/#{courier}"}>Show</.link>
+    </div>
+    <.link patch={~p"/couriers/#{courier}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, courier}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: courier.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="courier-modal" show on_cancel={JS.patch(~p"/couriers")}>
+  <.live_component
+    module={TracksterWeb.CourierLive.FormComponent}
+    id={@courier.id || :new}
+    title={@page_title}
+    action={@live_action}
+    courier={@courier}
+    patch={~p"/couriers"}
+  />
+</.modal>

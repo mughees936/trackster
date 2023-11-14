@@ -1,0 +1,50 @@
+<div class="w-full container mx-auto flex flex-wrap justify-between items-center mt-0 px-2 py-2 lg:py-6">
+  <div class="w-full flex flex-wrap items-center mt-0 px-2 py-2 lg:py-6">
+    <.header class="w-full">
+      Order <%= @order.id %>
+      <:subtitle>Order record</:subtitle>
+      <:actions>
+        <.link patch={~p"/orders/#{@order}/show/edit"} phx-click={JS.push_focus()}>
+          <.button>Edit order</.button>
+        </.link>
+      </:actions>
+    </.header>
+  </div>
+  <div class="w-full flex mt-0 px-2 py-2 lg:py-6">
+    <.list>
+      <:item title="Order tracking"><%= @order.order_tracking_id %></:item>
+      <:item title="Pickup from"><%= format_address(@order.pickup_address) %></:item>
+      <:item title="Deliver to"><%= format_address(@order.drop_address) %></:item>
+    </.list>
+  </div>
+
+  <div class="w-full flex mt-0 px-2 py-2 lg:py-6">
+    <div id="show_order" phx-hook="StylizeTrackingHook">
+      <.table id="order_trackings" rows={@order.trackings}>
+        <:col :let={tracking} label="Status"><%= tracking.status %></:col>
+        <:col :let={tracking} label="Description"><%= tracking.description %></:col>
+        <:col :let={tracking} label="Created at">
+          <%= utc_to_human_readable(tracking.inserted_at) %>
+        </:col>
+      </.table>
+    </div>
+  </div>
+  <.back navigate={~p"/orders"}>Back to orders</.back>
+</div>
+
+<.modal
+  :if={@live_action == :edit}
+  id="order-modal"
+  show
+  on_cancel={JS.patch(~p"/orders/#{@order}")}
+>
+  <.live_component
+    module={TracksterWeb.OrderLive.FormComponent}
+    id={@order.id}
+    title={@page_title}
+    action={@live_action}
+    current_user_id={@current_user_id}
+    order={@order}
+    patch={~p"/orders/#{@order}"}
+  />
+</.modal>

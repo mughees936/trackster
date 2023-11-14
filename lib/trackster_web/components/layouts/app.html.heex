@@ -1,0 +1,120 @@
+<header class="px-4 sm:px-6 lg:px-8">
+  <nav id="header" class="w-full z-30 top-0 text-white py-1 lg:py-6">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6">
+      <div class="pl-4 flex items-center">
+        <div class="flex items-center gap-4">
+          <a href="/">
+            <img src={~p"/images/logo.svg"} width="36" />
+          </a>
+          <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
+            Trackster
+          </p>
+        </div>
+      </div>
+
+      <div class="block lg:hidden pr-4">
+        <button
+          id="nav-toggle"
+          class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-green-500 appearance-none focus:outline-none"
+        >
+          <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20"
+        id="nav-content"
+      >
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="mr-3">
+            <%= if not is_nil(@current_user) do %>
+              <.link href={~p"/orders"} class="inline-block py-2 px-4 text-black no-underline">
+                My Orders
+              </.link>
+            <% else %>
+              <.link href={~p"/"} class="inline-block py-2 px-4 text-black no-underline">
+                About
+              </.link>
+              <.link
+                href={~p"/users/log_in"}
+                class="py-2 px-4 bg-transparent text-brand font-semibold rounded hover:bg-brand hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0"
+              >
+                Login
+              </.link>
+            <% end %>
+          </li>
+        </ul>
+        <%= if not is_nil(@current_user) do %>
+          <div>
+            <img
+              id="avatarButton"
+              type="button"
+              data-dropdown-toggle="userDropdown"
+              data-dropdown-placement="bottom-start"
+              class="w-10 h-10 rounded-full cursor-pointer"
+              src={~p"/images/profile.jpeg"}
+              alt="User dropdown"
+            />
+            <!-- Dropdown menu -->
+            <div
+              id="userDropdown"
+              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+            >
+              <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                <div>
+                  <%= @current_user.full_name %>
+                </div>
+                <div class="font-medium truncate">
+                  <%= @current_user.email %>
+                </div>
+              </div>
+              <ul
+                class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="avatarButton"
+              >
+                <li>
+                  <.link
+                    href={~p"/users/settings"}
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >
+                    Settings
+                  </.link>
+                </li>
+                <%= if @current_user.role in ["superadmin"] do %>
+                  <li>
+                    <.link
+                      href={~p"/users/settings"}
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Manage Users
+                    </.link>
+                  </li>
+                <% end %>
+              </ul>
+              <div class="py-1">
+                <.link
+                  href={~p"/users/log_out"}
+                  method="delete"
+                  class="block py-2 px-4 bg-transparent text-red-600 font-semibold rounded hover:bg-red-600 hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0"
+                >
+                  Log out
+                </.link>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+</header>
+<main class="px-4 py-20 sm:px-6 lg:px-8">
+  <%!-- <div class="mx-auto max-w-2xl">
+    <.flash_group flash={@flash} />
+    <%= @inner_content %>
+  </div> --%>
+  <.flash_group flash={@flash} />
+  <%= @inner_content %>
+</main>

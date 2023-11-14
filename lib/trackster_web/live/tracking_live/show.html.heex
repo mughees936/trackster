@@ -1,0 +1,28 @@
+<.header>
+  Tracking <%= @tracking.id %>
+  <:subtitle>This is a tracking record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/trackings/#{@tracking}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit tracking</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Status"><%= @tracking.status %></:item>
+  <:item title="Description"><%= @tracking.description %></:item>
+  <:item title="Order"><%= @tracking.order_id %></:item>
+</.list>
+
+<.back navigate={~p"/trackings"}>Back to trackings</.back>
+
+<.modal :if={@live_action == :edit} id="tracking-modal" show on_cancel={JS.patch(~p"/trackings/#{@tracking}")}>
+  <.live_component
+    module={TracksterWeb.TrackingLive.FormComponent}
+    id={@tracking.id}
+    title={@page_title}
+    action={@live_action}
+    tracking={@tracking}
+    patch={~p"/trackings/#{@tracking}"}
+  />
+</.modal>

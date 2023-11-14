@@ -1,0 +1,385 @@
+<body class="gradient leading-relaxed tracking-wide flex flex-col">
+  <!--Nav-->
+  <div class="container mx-auto h-full">
+    <.live_component module={TracksterWeb.OrderTrackingLive.Search} id="search-home" />
+    <div class="flex items-center w-full mx-auto content-end">
+      <div class="background flex flex-1 bg-white w-1/2 rounded mb-8"></div>
+    </div>
+  </div>
+
+  <section class="bg-gray-100 border-b py-8">
+    <div class="container max-w-5xl mx-auto m-8">
+      <h2 class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800">
+        Our Services
+      </h2>
+      <div class="w-full mb-4">
+        <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+      </div>
+
+      <div class="flex flex-wrap">
+        <div class="w-5/6 sm:w-1/2 p-6">
+          <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
+            Express Delivery
+          </h3>
+          <p class="text-gray-600 mb-8">
+            Fast and reliable courier services to ensure your parcels reach their destination in the shortest time possible.<br /><br />
+          </p>
+        </div>
+        <div class="w-full sm:w-1/2 p-6">
+          <img src={~p"/images/express.svg"} />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap flex-col-reverse sm:flex-row">
+        <div class="w-full sm:w-1/2 p-6 mt-6">
+          <img src={~p"/images/realtime.svg"} />
+        </div>
+        <div class="w-full sm:w-1/2 p-6 mt-6">
+          <div class="align-middle">
+            <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
+              Real-time Tracking
+            </h3>
+            <p class="text-gray-600 mb-8">
+              Track your shipments in real-time, providing you with accurate and up-to-date information on the current location of your package.<br /><br />
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap">
+        <div class="w-5/6 sm:w-1/2 p-6">
+          <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
+            Secure Packaging
+          </h3>
+          <p class="text-gray-600 mb-8">
+            Our dedicated team ensures the safe and secure handling of your items, giving you peace of mind throughout the delivery process.<br /><br />
+          </p>
+        </div>
+        <div class="w-full sm:w-1/2 p-6">
+          <img src={~p"/images/secure.svg"} />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap flex-col-reverse sm:flex-row">
+        <div class="w-full sm:w-1/2 p-6 mt-6">
+          <img src={~p"/images/support.svg"} />
+        </div>
+        <div class="w-full sm:w-1/2 p-6 mt-6">
+          <div class="align-middle">
+            <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
+              24/7 Customer Support
+            </h3>
+            <p class="text-gray-600 mb-8">
+              24/7 customer support to assist you at any stage, addressing inquiries and providing solutions to enhance your courier experience.<br /><br />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white border-b py-12 ">
+    <div class="container mx-auto flex flex-wrap items-center justify-between pb-12">
+      <h2 class="w-full my-2 text-xl font-black leading-tight text-center text-gray-800 lg:mt-8">
+        Our Customers / Featured in
+      </h2>
+      <div class="w-full mb-4">
+        <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+      </div>
+
+      <div class="flex flex-1 flex-wrap max-w-4xl mx-auto items-center justify-between text-xl text-gray-500 font-bold opacity-75">
+        <span class="w-1/2 p-4 md:w-auto flex items-center">
+          <svg
+            class="h-10 w-10 mr-4 fill-current text-gray-500 opacity-75"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M7 0H6L0 3v6l4-1v12h12V8l4 1V3l-6-3h-1a3 3 0 0 1-6 0z" />
+          </svg>
+          >TeeShirtz
+        </span>
+
+        <span class="w-1/2 p-4 md:w-auto flex items-center">
+          <svg
+            class="h-10 w-10 mr-4 fill-current text-gray-500 opacity-75"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M15.75 8l-3.74-3.75a3.99 3.99 0 0 1 6.82-3.08A4 4 0 0 1 15.75 8zM1.85 15.3l9.2-9.19 2.83 2.83-9.2 9.2-2.82-2.84zm-1.4 2.83l2.11-2.12 1.42 1.42-2.12 2.12-1.42-1.42zM10 15l2-2v7h-2v-5z" />
+          </svg>
+          >Mic.Check
+        </span>
+
+        <span class="w-1/2 p-4 md:w-auto flex items-center">
+          <svg
+            class="h-10 w-10 mr-4 fill-current text-gray-500 opacity-75"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10 12a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-3a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm4 2.75V20l-4-4-4 4v-8.25a6.97 6.97 0 0 0 8 0z" />
+          </svg>
+          >BadgeLife.io
+        </span>
+
+        <span class="w-1/2 p-4 md:w-auto flex items-center">
+          <svg
+            class="h-10 w-10 mr-4 fill-current text-gray-500 opacity-75"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M15.3 14.89l2.77 2.77a1 1 0 0 1 0 1.41 1 1 0 0 1-1.41 0l-2.59-2.58A5.99 5.99 0 0 1 11 18V9.04a1 1 0 0 0-2 0V18a5.98 5.98 0 0 1-3.07-1.51l-2.59 2.58a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41l2.77-2.77A5.95 5.95 0 0 1 4.07 13H1a1 1 0 1 1 0-2h3V8.41L.93 5.34a1 1 0 0 1 0-1.41 1 1 0 0 1 1.41 0l2.1 2.1h11.12l2.1-2.1a1 1 0 0 1 1.41 0 1 1 0 0 1 0 1.41L16 8.41V11h3a1 1 0 1 1 0 2h-3.07c-.1.67-.32 1.31-.63 1.89zM15 5H5a5 5 0 1 1 10 0z" />
+          </svg>
+          >Bugz 4 Life
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-100 w-full mx-auto text-center pt-6 pb-12">
+    <h2 class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800">
+      BE OUR PARTNER
+    </h2>
+    <div class="w-full mb-4">
+      <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+    </div>
+    <div class="container max-w-5xl mx-auto m-8">
+      <div class="flex justify-center gap-10 flex-wrap">
+        <div class="py-4">
+          <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <img class="rounded-t-lg" src={~p"/images/e-commerce.jpg"} alt="" />
+            <div class="p-5 text-left">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                E-Commerce Sellers
+              </h5>
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                Join our ecommerce partner program to expand your business and reach a wider audience.
+              </p>
+              <button class="inline-flex py-2 px-4 bg-transparent text-brand font-semibold border border-brand rounded hover:bg-brand hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0">
+                Read more
+                <svg
+                  class="rtl:rotate-180 w-4 h-4 ms-2 pt-2"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="py-4">
+          <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <img class="rounded-t-lg" src={~p"/images/partners.jpg"} alt="" />
+            <div class="p-5 text-left">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                Service Providers
+              </h5>
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                Explore partnership opportunities as a service provider. Collaborate with us to offer your services as local courier.
+              </p>
+              <button class="inline-flex py-2 px-4 bg-transparent text-brand font-semibold border border-brand rounded hover:bg-brand hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0">
+                Read more
+                <svg
+                  class="rtl:rotate-180 w-4 h-4 ms-2 pt-2"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M1 5h12m0 0L9 1m4 4L9 9"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Footer-->
+  <footer class="bg-white ">
+    <div class="container mx-auto mt-8 px-8">
+      <div class="w-full flex flex-col md:flex-row py-6">
+        <div class="flex-1 mb-6">
+          <a
+            class="tbg-brand/5 text-brand rounded-full px-2 font-bold leading-6 text-xl lg:text-2xl"
+            href="/"
+          >
+            <svg
+              class="inline-block"
+              width="36"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 160 160"
+            >
+              <image xlink:href={~p"/images/logo.svg"} />
+            </svg>
+            Trackster
+          </a>
+        </div>
+
+        <div class="flex-1">
+          <p class="uppercase font-extrabold text-brand md:mb-6">Links</p>
+          <ul class="list-reset mb-6">
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                FAQ
+              </a>
+            </li>
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Help
+              </a>
+            </li>
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Support
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex-1">
+          <p class="uppercase font-extrabold text-brand md:mb-6">Legal</p>
+          <ul class="list-reset mb-6">
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Terms
+              </a>
+            </li>
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Privacy
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex-1">
+          <p class="uppercase font-extrabold text-brand md:mb-6">Social</p>
+          <ul class="list-reset mb-6">
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Facebook
+              </a>
+            </li>
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Linkedin
+              </a>
+            </li>
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Twitter
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex-1">
+          <p class="uppercase font-extrabold text-brand md:mb-6">
+            Company
+          </p>
+          <ul class="list-reset mb-6">
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Official Blog
+              </a>
+            </li>
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                About Us
+              </a>
+            </li>
+            <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+              <a
+                href="/"
+                class="font-light no-underline hover:underline text-gray-800 hover:text-orange-500"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /*Toggle dropdown list*/
+    /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
+
+    var navMenuDiv = document.getElementById("nav-content");
+    var navMenu = document.getElementById("nav-toggle");
+
+    document.onclick = check;
+    function check(e) {
+      var target = (e && e.target) || (event && event.srcElement);
+
+      //Nav Menu
+      if (!checkParent(target, navMenuDiv)) {
+        // click NOT on the menu
+        if (checkParent(target, navMenu)) {
+          // click on the link
+          if (navMenuDiv.classList.contains("hidden")) {
+            navMenuDiv.classList.remove("hidden");
+          } else {
+            navMenuDiv.classList.add("hidden");
+          }
+        } else {
+          // click both outside link and outside menu, hide menu
+          navMenuDiv.classList.add("hidden");
+        }
+      }
+    }
+    function checkParent(t, elm) {
+      while (t.parentNode) {
+        if (t == elm) {
+          return true;
+        }
+        t = t.parentNode;
+      }
+      return false;
+    }
+  </script>
+</body>

@@ -17,7 +17,7 @@ defmodule TracksterWeb.TrackingLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Tracking")
-    |> assign(:tracking, Orders.get_tracking!(id))
+    |> assign(:tracking, Orders.get_tracking(id))
   end
 
   defp apply_action(socket, :new, _params) do
@@ -39,7 +39,7 @@ defmodule TracksterWeb.TrackingLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    tracking = Orders.get_tracking!(id)
+    tracking = Orders.get_tracking(id)
     {:ok, _} = Orders.delete_tracking(tracking)
 
     {:noreply, stream_delete(socket, :trackings, tracking)}

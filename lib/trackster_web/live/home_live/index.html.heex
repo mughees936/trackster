@@ -1,77 +1,127 @@
-<body class="gradient leading-relaxed tracking-wide flex flex-col">
-  <!--Nav-->
-  <div class="container mx-auto h-full">
-    <.live_component module={TracksterWeb.OrderTrackingLive.Search} id="search-home" />
-    <div class="flex items-center w-full mx-auto content-end">
-      <div class="background flex flex-1 bg-white w-1/2 rounded mb-8"></div>
+<%!-- <div class="fixed inset-x-0 lg:inset-x-auto bottom-6 lg:right-8 xl:right-10 xl:bottom-8">
+  <div class="lg:w-72 px-6 lg:px-0">
+    <div class="p-2 bg-blue-600 rounded-lg shadow-lg sm:p-3">
+      <div class="flex flex-wrap items-center justify-between">
+        <a
+          target="_blank"
+          href="https://www.buymeacoffee.com/khatabwedaa"
+          class="flex items-center flex-1 w-0"
+        >
+          <span class="flex p-2 bg-blue-800 rounded-lg">
+            <svg
+              class="h-6 w-6 text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5.12954 3.00772C5.48563 2.38457 6.14831 2 6.86603 2H17.134C17.8517 2 18.5144 2.38457 18.8704 3.00772L20.0133 5.00772C20.6612 6.14163 20.0618 7.51107 18.9235 7.89532C18.9276 7.97661 18.9269 8.0591 18.9209 8.14249L18.0638 20.1425C17.989 21.1891 17.1181 22 16.0689 22H7.9311C6.88182 22 6.01094 21.1891 5.93618 20.1425L5.07904 8.14249C5.07308 8.0591 5.07231 7.97661 5.07645 7.89531C3.93813 7.51105 3.33874 6.14162 3.98668 5.00772L5.12954 3.00772ZM7.07396 8L7.28824 11H16.7117L16.926 8H7.07396ZM7.71681 17L7.9311 20H16.0689L16.2831 17H7.71681ZM18.2768 6L17.134 4L6.86603 4L5.72317 6H18.2768Z"
+                fill="currentColor"
+              >
+              </path>
+            </svg>
+          </span>
+
+          <p class="ml-3 font-medium tracking-wide text-white truncate">
+            By me a coffee
+          </p>
+        </a>
+      </div>
     </div>
   </div>
+</div> --%>
 
-  <section class="bg-gray-100 border-b py-8">
-    <div class="container max-w-5xl mx-auto m-8">
-      <h2 class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800">
-        Our Services
-      </h2>
-      <div class="w-full mb-4">
-        <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-      </div>
-
-      <div class="flex flex-wrap">
-        <div class="w-5/6 sm:w-1/2 p-6">
-          <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-            Express Delivery
-          </h3>
-          <p class="text-gray-600 mb-8">
-            Fast and reliable courier services to ensure your parcels reach their destination in the shortest time possible.<br /><br />
-          </p>
-        </div>
-        <div class="w-full sm:w-1/2 p-6">
-          <img src={~p"/images/express.svg"} />
-        </div>
-      </div>
-
-      <div class="flex flex-wrap flex-col-reverse sm:flex-row">
-        <div class="w-full sm:w-1/2 p-6 mt-6">
-          <img src={~p"/images/realtime.svg"} />
-        </div>
-        <div class="w-full sm:w-1/2 p-6 mt-6">
-          <div class="align-middle">
-            <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-              Real-time Tracking
-            </h3>
-            <p class="text-gray-600 mb-8">
-              Track your shipments in real-time, providing you with accurate and up-to-date information on the current location of your package.<br /><br />
+<body class="gradient leading-relaxed tracking-wide flex flex-col">
+  <section class="bg-white dark:bg-gray-800">
+    <div class="container flex flex-col px-6 py-10 mx-auto space-y-6 lg:h-[32rem] lg:py-16 lg:flex-row lg:items-center">
+      <div class="w-full lg:w-1/2">
+        <div class="lg:max-w-lg">
+          <h1 class="my-4 text-3xl lg:text-5xl font-black leading-tight dark:text-white">
+            Delivering excellence, every mile of the way
+          </h1>
+          <div class="mt-8 space-y-5">
+            <p class="flex items-center -mx-2 text-gray-700 dark:text-gray-200">
+              <span class="mx-2">
+                Fast, secure, and reliable courier services for your peace of mind.
+              </span>
             </p>
           </div>
+          <p class="leading-normal text-gray-800 text-base md:text-xl lg:text-2xl mb-8"></p>
         </div>
+
+        <.live_component module={TracksterWeb.OrderTrackingLive.Search} id="search-home" />
       </div>
 
-      <div class="flex flex-wrap">
-        <div class="w-5/6 sm:w-1/2 p-6">
-          <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-            Secure Packaging
-          </h3>
-          <p class="text-gray-600 mb-8">
-            Our dedicated team ensures the safe and secure handling of your items, giving you peace of mind throughout the delivery process.<br /><br />
-          </p>
-        </div>
-        <div class="w-full sm:w-1/2 p-6">
-          <img src={~p"/images/secure.svg"} />
-        </div>
+      <div class="flex items-center justify-center w-full h-96 lg:w-1/2">
+        <img
+          class="w-full h-full mx-auto rounded-md lg:max-w-2xl"
+          src={~p"/images/background.svg"}
+          alt="glasses photo"
+        />
       </div>
+    </div>
+  </section>
 
-      <div class="flex flex-wrap flex-col-reverse sm:flex-row">
-        <div class="w-full sm:w-1/2 p-6 mt-6">
-          <img src={~p"/images/support.svg"} />
-        </div>
-        <div class="w-full sm:w-1/2 p-6 mt-6">
-          <div class="align-middle">
-            <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-              24/7 Customer Support
-            </h3>
-            <p class="text-gray-600 mb-8">
-              24/7 customer support to assist you at any stage, addressing inquiries and providing solutions to enhance your courier experience.<br /><br />
-            </p>
+  <section class="bg-brand/5 border-b py-8">
+    <h2 class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800">
+      Our Services
+    </h2>
+    <div class="w-full mb-4">
+      <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+    </div>
+    <div class="py-16">
+      <div class="container m-auto px-6 text-gray-500 md:px-12 xl:px-0">
+        <div class="mx-auto grid gap-6 md:w-3/4 lg:w-full lg:grid-cols-3">
+          <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+            <div class="mb-12 space-y-4">
+              <h3 class="text-2xl font-semibold text-brand">Express Delivery</h3>
+              <p class="mb-6">
+                Fast and reliable courier services to ensure your parcels reach their destination in the shortest time possible.
+              </p>
+              <a href="#" class="block font-medium text-brand">Know more</a>
+            </div>
+            <img
+              src={~p"/images/express.svg"}
+              class="w-full ml-auto -mb-12"
+              alt="illustration"
+              loading="lazy"
+              width="900"
+              height="600"
+            />
+          </div>
+          <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+            <div class="mb-12 space-y-4">
+              <h3 class="text-2xl font-semibold text-brand">Real-time Tracking</h3>
+              <p class="mb-6">
+                Track your shipments in real-time, providing you with accurate and up-to-date information on the current location of your package.
+              </p>
+              <a href="#" class="block font-medium text-brand">Know more</a>
+            </div>
+            <img
+              src={~p"/images/realtime.svg"}
+              class="w-full ml-auto"
+              alt="illustration"
+              loading="lazy"
+              width="900"
+              height="600"
+            />
+          </div>
+          <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+            <div class="mb-12 space-y-4">
+              <h3 class="text-2xl font-semibold text-brand">24/7 Customer Support</h3>
+              <p class="mb-6">
+                24/7 customer support to assist you at any stage, addressing inquiries and providing solutions to enhance your courier experience.
+              </p>
+              <a href="#" class="block font-medium text-brand">Know more</a>
+            </div>
+            <img
+              src={~p"/images/support.svg"}
+              class="w-full ml-auto "
+              alt="illustration"
+              loading="lazy"
+              width="900"
+              height="600"
+            />
           </div>
         </div>
       </div>
@@ -87,10 +137,10 @@
         <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
       </div>
 
-      <div class="flex flex-1 flex-wrap max-w-4xl mx-auto items-center justify-between text-xl text-gray-500 font-bold opacity-75">
-        <span class="w-1/2 p-4 md:w-auto flex items-center">
+      <div class="flex flex-1 flex-wrap max-w-4xl mx-auto items-center justify-between text-xl text-brand font-bold opacity-75">
+        <span class="w-1/2 p-4 md:w-auto flex items-center text-brand">
           <svg
-            class="h-10 w-10 mr-4 fill-current text-gray-500 opacity-75"
+            class="h-10 w-10 mr-4 fill-current text-brand opacity-75"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
           >
@@ -101,7 +151,7 @@
 
         <span class="w-1/2 p-4 md:w-auto flex items-center">
           <svg
-            class="h-10 w-10 mr-4 fill-current text-gray-500 opacity-75"
+            class="h-10 w-10 mr-4 fill-current text-brand opacity-75"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
           >
@@ -112,7 +162,7 @@
 
         <span class="w-1/2 p-4 md:w-auto flex items-center">
           <svg
-            class="h-10 w-10 mr-4 fill-current text-gray-500 opacity-75"
+            class="h-10 w-10 mr-4 fill-current text-brand opacity-75"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
           >
@@ -123,7 +173,7 @@
 
         <span class="w-1/2 p-4 md:w-auto flex items-center">
           <svg
-            class="h-10 w-10 mr-4 fill-current text-gray-500 opacity-75"
+            class="h-10 w-10 mr-4 fill-current text-brand opacity-75"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
           >
@@ -135,7 +185,7 @@
     </div>
   </section>
 
-  <section class="bg-gray-100 w-full mx-auto text-center pt-6 pb-12">
+  <section class="bg-brand/5 w-full mx-auto text-center pt-6 pb-12">
     <h2 class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800">
       BE OUR PARTNER
     </h2>
@@ -148,7 +198,7 @@
           <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg" src={~p"/images/e-commerce.jpg"} alt="" />
             <div class="p-5 text-left">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-brand dark:text-white">
                 E-Commerce Sellers
               </h5>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
@@ -180,7 +230,7 @@
           <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg" src={~p"/images/partners.jpg"} alt="" />
             <div class="p-5 text-left">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-brand dark:text-white">
                 Service Providers
               </h5>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">

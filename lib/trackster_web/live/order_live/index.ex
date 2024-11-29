@@ -37,6 +37,7 @@ defmodule TracksterWeb.OrderLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
+    |> assign(:active_filter, :view_all)
     |> assign(:page_title, "Listing Orders")
     |> assign(:order, nil)
   end
@@ -52,5 +53,12 @@ defmodule TracksterWeb.OrderLive.Index do
     {:ok, _} = Orders.delete_order(order)
 
     {:noreply, stream_delete(socket, :orders, order)}
+  end
+
+  @impl true
+  def handle_event("filter", %{"value" => filter}, socket) do
+    {:noreply,
+     socket
+     |> assign(:active_filter, String.to_atom(filter))}
   end
 end

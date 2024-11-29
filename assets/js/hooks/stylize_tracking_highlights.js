@@ -2,12 +2,12 @@ const StylizeTrackings = {
     mounted() {
         console.log("Hook", this.el);
         let regex = /\[([^\]]+)\]/g;
-        let liTags = this.el.querySelectorAll('li');
+        let pTags = this.el.querySelectorAll('p');
 
-        console.log(liTags);
+        console.log(pTags);
 
-        liTags.forEach(td => {
-            td.innerHTML = td.innerHTML.replace(regex, '<b class="bg-brand/5 text-brand rounded p-1 font-medium leading-6">$1</b>');
+        pTags.forEach(p => {
+            p.innerHTML = p.innerHTML.replace(regex, '<b class="bg-brand/5 text-brand rounded p-1 font-medium leading-6">$1</b>');
         });
     }
 }

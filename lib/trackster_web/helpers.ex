@@ -1,12 +1,9 @@
 defmodule TracksterWeb.Helpers do
   def format_address(%Trackster.Orders.Address{state: state, city: city}), do: "#{city}, #{state}"
 
-  def trunc_address(%Trackster.Orders.Address{state: state, city: city}),
-    do: "#{keep_first_two_words(state)} - #{keep_first_two_words(city)}"
-
-  defp keep_first_two_words(str) do
+  def keep_first_n_words(str, n \\ 2) do
     String.split(str, ~r/\s+/)
-    |> Enum.take(2)
+    |> Enum.take(n)
     |> Enum.join(" ")
   end
 
@@ -20,6 +17,23 @@ defmodule TracksterWeb.Helpers do
     else
       err -> IO.inspect(err, label: "Invalid UTC datetime for conversion")
     end
+  end
+
+  def order_number(id), do: "##{String.slice(id, -5..-1)}"
+
+  def status_text(status) do
+    case status do
+      "creation" -> "Created"
+      "pickup" -> "Picked Up"
+      "delivering" -> "Delivering"
+      "signed" -> "Order Signed"
+      _ -> "In Transit"
+    end
+  end
+
+  def order_tracking_description(%Trackster.Orders.Order{trackings: trackings}) do
+    List.last(trackings).description
+    |> IO.inspect(label: "Description")
   end
 
   def verify_user_token(%{"user_token" => token}) when not is_nil(token) do

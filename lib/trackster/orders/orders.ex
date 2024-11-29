@@ -226,14 +226,14 @@ defmodule Trackster.Orders do
 
   ## Examples
 
-      iex> get_tracking!(123)
+      iex> get_tracking(123)
       %Tracking{}
 
-      iex> get_tracking!(456)
+      iex> get_tracking(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_tracking!(id), do: Repo.get!(Tracking, id)
+  def get_tracking(id), do: Repo.get!(Tracking, id)
 
   @doc """
   Deletes a tracking.
@@ -249,6 +249,12 @@ defmodule Trackster.Orders do
   """
   def delete_tracking(%Tracking{} = tracking) do
     Repo.delete(tracking)
+  end
+
+  def order_trackings_query(order_id) do
+    from(t in Tracking,
+      where: t.is_active == ^true and t.order_id == ^order_id
+    )
   end
 
   @doc """
@@ -350,6 +356,8 @@ defmodule Trackster.Orders do
       ]
     )
     |> Repo.one()
+    |> Repo.preload(:pickup_address)
+    |> Repo.preload(:drop_address)
   end
 
   @doc """

@@ -133,9 +133,9 @@ defmodule Trackster.OrdersTest do
       assert Orders.list_trackings() == [tracking]
     end
 
-    test "get_tracking!/1 returns the tracking with given id" do
+    test "get_tracking/1 returns the tracking with given id" do
       tracking = tracking_fixture()
-      assert Orders.get_tracking!(tracking.id) == tracking
+      assert Orders.get_tracking(tracking.id) == tracking
     end
 
     test "create_tracking/1 with valid data creates a tracking" do
@@ -164,13 +164,13 @@ defmodule Trackster.OrdersTest do
     test "update_tracking/2 with invalid data returns error changeset" do
       tracking = tracking_fixture()
       assert {:error, %Ecto.Changeset{}} = Orders.update_tracking(tracking, @invalid_attrs)
-      assert tracking == Orders.get_tracking!(tracking.id)
+      assert tracking == Orders.get_tracking(tracking.id)
     end
 
     test "delete_tracking/1 deletes the tracking" do
       tracking = tracking_fixture()
       assert {:ok, %Tracking{}} = Orders.delete_tracking(tracking)
-      assert_raise Ecto.NoResultsError, fn -> Orders.get_tracking!(tracking.id) end
+      assert_raise Ecto.NoResultsError, fn -> Orders.get_tracking(tracking.id) end
     end
 
     test "change_tracking/1 returns a tracking changeset" do

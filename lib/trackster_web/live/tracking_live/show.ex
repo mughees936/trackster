@@ -13,7 +13,7 @@ defmodule TracksterWeb.TrackingLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:tracking, Orders.get_tracking!(id))}
+     |> assign(:tracking, Orders.get_tracking(id))}
   end
 
   defp page_title(:show), do: "Show Tracking"

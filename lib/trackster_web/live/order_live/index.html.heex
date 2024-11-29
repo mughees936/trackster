@@ -1,42 +1,399 @@
-<div class="w-full container mx-auto flex flex-wrap justify-between items-center mt-0 px-2 py-2 lg:py-6">
-  <div class="w-full flex flex-wrap items-center mt-0 px-2 py-2 lg:py-6">
-    <.header class="w-full">
-      Listing Orders
-      <:actions>
-        <.link patch={~p"/orders/new"}>
-          <.button>New Order</.button>
-        </.link>
-      </:actions>
-    </.header>
-  </div>
-  <div class="w-full flex mt-0 px-2 py-2 lg:py-6">
-    <.table
-      id="orders"
-      rows={@streams.orders}
-      row_click={fn {_id, order} -> JS.navigate(~p"/orders/#{order}") end}
-    >
-      <:col :let={{_id, order}} label="Order tracking"><%= order.order_tracking_id %></:col>
-      <:col :let={{_id, order}} label="Pickup from">
-        <%= trunc_address(order.pickup_address) %>
-      </:col>
-      <:col :let={{_id, order}} label="Deliver to"><%= trunc_address(order.drop_address) %></:col>
-      <:action :let={{_id, order}}>
-        <div class="sr-only">
-          <.link navigate={~p"/orders/#{order}"}>Show</.link>
-        </div>
-        <.link patch={~p"/orders/#{order}/edit"}>Edit</.link>
-      </:action>
-      <:action :let={{id, order}}>
-        <.link
-          phx-click={JS.push("delete", value: %{id: order.id}) |> hide("##{id}")}
-          data-confirm="Are you sure?"
+<section class="container px-4 py-10 mx-auto">
+  <div class="flex flex-row items-center justify-between">
+    <div class="flex">
+      <div class="flex items-center gap-x-3">
+        <h1 class="text-2xl font-medium text-gray-800 dark:text-white">Orders</h1>
+
+        <span class="px-3 py-1 text-xs text-brand bg-brand/5 rounded-full dark:bg-gray-800 dark:text-brand">
+          <%= length(@streams.orders.inserts) %>
+        </span>
+      </div>
+    </div>
+
+    <div class="flex items-center mt-4 gap-x-3">
+      <button
+        phx-click={JS.patch(~p"/orders/new")}
+        class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-green-700 rounded-lg shrink-0 gap-x-2 hover:bg-green-500 dark:hover:bg-blue-500 dark:bg-blue-600"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
         >
-          Delete
-        </.link>
-      </:action>
-    </.table>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+
+        <span>Add Order</span>
+      </button>
+    </div>
   </div>
-</div>
+
+  <div class="mt-6 md:flex md:items-center md:justify-between">
+    <div class="flex justify-center items-baseline flex-wrap">
+      <div class="flex m-2">
+        <button
+          phx-click="filter"
+          value="view_all"
+          class={[
+            "text-base rounded-bl rounded-tl flex justify-center duration-200",
+            "px-4 py-2 cursor-pointer bg-brand/5 text-brand border",
+            "hover:scale-110 hover:bg-brand hover:text-white ease-in-out border-brand transition",
+            "focus:outline-none focus:scale-110 focus:bg-brand focus:text-white"
+          ]}
+        >
+          <div class="flex leading-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-edit w-5 h-5 mr-1"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6.143 1H1.857A.857.857 0 0 0 1 1.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 7 6.143V1.857A.857.857 0 0 0 6.143 1Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 17 6.143V1.857A.857.857 0 0 0 16.143 1Zm-10 10H1.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 7 16.143v-4.286A.857.857 0 0 0 6.143 11Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z"
+              />
+            </svg>
+            View all
+          </div>
+        </button>
+        <button
+          phx-click="filter"
+          value="in_transit"
+          class={[
+            "text-base flex justify-center duration-200",
+            "px-4 py-2 cursor-pointer bg-brand/5 text-brand border",
+            "hover:scale-110 hover:bg-brand hover:text-white ease-in-out border-brand transition",
+            "focus:outline-none focus:scale-110 focus:bg-brand focus:text-white"
+          ]}
+        >
+          <div class="flex leading-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-edit w-5 h-5 mr-1"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 1H1m14 18H1m2 0v-4.333a2 2 0 0 1 .4-1.2L5.55 10.6a1 1 0 0 0 0-1.2L3.4 6.533a2 2 0 0 1-.4-1.2V1h10v4.333a2 2 0 0 1-.4 1.2L10.45 9.4a1 1 0 0 0 0 1.2l2.15 2.867a2 2 0 0 1 .4 1.2V19H3Z"
+              />
+            </svg>
+            Transit
+          </div>
+        </button>
+        <button
+          phx-click="filter"
+          value="completed"
+          class={[
+            "text-base rounded-br rounded-tr flex justify-center duration-200",
+            "px-4 py-2 cursor-pointer bg-brand/5 text-brand border",
+            "hover:scale-110 hover:bg-brand hover:text-white ease-in-out border-brand transition",
+            "focus:outline-none focus:scale-110 focus:bg-brand focus:text-white"
+          ]}
+        >
+          <div class="flex leading-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-eye w-5 h-5 mr-1"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 5h8m-1-3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1m6 0v3H6V2m6 0h4a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4m0 9.464 2.025 1.965L12 9.571"
+              />
+            </svg>
+            Done
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="relative flex items-center mt-4 md:mt-0">
+      <span class="absolute">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+          />
+        </svg>
+      </span>
+
+      <input
+        type="text"
+        placeholder="Search"
+        class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+      />
+    </div>
+  </div>
+
+  <div class="flex flex-col mt-6">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-800">
+              <tr class="bg-brand/5">
+                <th
+                  scope="col"
+                  class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-700 dark:text-gray-400"
+                >
+                  <button class="flex items-center gap-x-3 focus:outline-none">
+                    <span>Order</span>
+                  </button>
+                </th>
+
+                <th
+                  scope="col"
+                  class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-700 dark:text-gray-400"
+                >
+                  Status
+                </th>
+
+                <th
+                  scope="col"
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-700 dark:text-gray-400"
+                >
+                  Pickup
+                </th>
+
+                <th
+                  scope="col"
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-700 dark:text-gray-400"
+                >
+                  Delivery
+                </th>
+
+                <th
+                  scope="col"
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-700 dark:text-gray-400"
+                >
+                  Description
+                </th>
+
+                <th scope="col" class="relative py-3.5 px-4">
+                  <span class="sr-only">Edit</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+              <tr :for={{id, order} <- @streams.orders}>
+                <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                  <div>
+                    <h2 class="font-medium text-gray-800 dark:text-white ">
+                      <%= order_number(order.id) %>
+                    </h2>
+                  </div>
+                </td>
+                <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
+                  <div class="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
+                    <%= order.status %>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                  <div>
+                    <h4 class="text-gray-700 dark:text-gray-200">
+                      <%= order.pickup_address.city %>
+                    </h4>
+                    <p class="text-gray-500 dark:text-gray-400">
+                      <%= order.pickup_address.state %>
+                    </p>
+                  </div>
+                </td>
+                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                  <div>
+                    <h4 class="text-gray-700 dark:text-gray-200">
+                      <%= order.drop_address.city %>
+                    </h4>
+                    <p class="text-gray-500 dark:text-gray-400">
+                      <%= order.drop_address.state %>
+                    </p>
+                  </div>
+                </td>
+
+                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                  <div>
+                    <textarea
+                      disabled
+                      rows="3"
+                      name="order_description"
+                      id={"order_description-#{id}"}
+                      class="block sm:w-[32rem] text-sm text-gray-900 bg-transparent border-transparent"
+                    >
+                      <%= order_tracking_description(order) %>
+                    </textarea>
+                  </div>
+                </td>
+
+                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                  <div>
+                    <button
+                      id={"optionsButton-#{id}"}
+                      type="button"
+                      data-dropdown-toggle={"optionsDropdown-#{id}"}
+                      data-dropdown-placement="bottom-start"
+                      alt="User dropdown"
+                      class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                        />
+                      </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div
+                      id={"optionsDropdown-#{id}"}
+                      class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                    >
+                      <ul
+                        class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby={"optionsButton-#{id}"}
+                      >
+                        <li>
+                          <.link
+                            navigate={~p"/orders/#{order}"}
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          >
+                            Show
+                          </.link>
+                        </li>
+                        <li>
+                          <.link
+                            patch={~p"/orders/#{order}/edit"}
+                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          >
+                            Edit
+                          </.link>
+                        </li>
+                      </ul>
+                      <div class="py-1">
+                        <.link
+                          phx-click={JS.push("delete", value: %{id: order.id}) |> hide("##{id}")}
+                          data-confirm="Are you sure?"
+                          class="block py-2 px-4 bg-transparent text-red-600 font-semibold rounded hover:bg-red-600 hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0"
+                        >
+                          Delete
+                        </.link>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 sm:flex sm:items-center sm:justify-between ">
+    <div class="text-sm text-gray-500 dark:text-gray-400">
+      Page <span class="font-medium text-gray-700 dark:text-gray-100">1 of 10</span>
+    </div>
+
+    <div class="flex items-center mt-4 gap-x-4 sm:mt-0">
+      <a
+        href="#"
+        class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md sm:w-auto gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 rtl:-scale-x-100"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+          />
+        </svg>
+
+        <span>
+          previous
+        </span>
+      </a>
+
+      <a
+        href="#"
+        class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md sm:w-auto gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
+      >
+        <span>
+          Next
+        </span>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 rtl:-scale-x-100"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
 
 <.modal
   :if={@live_action in [:new, :edit]}

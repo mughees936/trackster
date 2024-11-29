@@ -84,11 +84,10 @@ defmodule Trackster.Workers.TrackingsHandler do
       |> IO.inspect(label: "Here os head")
 
     Multi.new()
-    |> Multi.insert(:tracking, Tracking.changeset(attrs))
-    |> Multi.update(
-      :last_tracking,
-      Tracking.update_changeset(current_tracking, %{"is_active" => false})
+    |> Ecto.Multi.update_all(:update_all, Orders.order_trackings_query(order.id),
+      set: [is_active: false]
     )
+    |> Multi.insert(:tracking, Tracking.changeset(attrs))
     |> Multi.update(:order, fn %{tracking: tracking} ->
       Order.status_changeset(order, tracking.status)
     end)

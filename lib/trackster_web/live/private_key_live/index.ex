@@ -17,7 +17,7 @@ defmodule TracksterWeb.PrivateKeyLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Private key")
-    |> assign(:private_key, Accounts.get_private_key!(id))
+    |> assign(:private_key, Accounts.get_private_key(id))
   end
 
   defp apply_action(socket, :new, _params) do
@@ -39,7 +39,7 @@ defmodule TracksterWeb.PrivateKeyLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    private_key = Accounts.get_private_key!(id)
+    private_key = Accounts.get_private_key(id)
     {:ok, _} = Accounts.delete_private_key(private_key)
 
     {:noreply, stream_delete(socket, :private_keys, private_key)}

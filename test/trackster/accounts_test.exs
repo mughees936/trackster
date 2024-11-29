@@ -518,9 +518,9 @@ defmodule Trackster.AccountsTest do
       assert Accounts.list_private_keys() == [private_key]
     end
 
-    test "get_private_key!/1 returns the private_key with given id" do
+    test "get_private_key/1 returns the private_key with given id" do
       private_key = private_key_fixture()
-      assert Accounts.get_private_key!(private_key.id) == private_key
+      assert Accounts.get_private_key(private_key.id) == private_key
     end
 
     test "create_private_key/1 with valid data creates a private_key" do
@@ -543,13 +543,13 @@ defmodule Trackster.AccountsTest do
     test "update_private_key/2 with invalid data returns error changeset" do
       private_key = private_key_fixture()
       assert {:error, %Ecto.Changeset{}} = Accounts.update_private_key(private_key, @invalid_attrs)
-      assert private_key == Accounts.get_private_key!(private_key.id)
+      assert private_key == Accounts.get_private_key(private_key.id)
     end
 
     test "delete_private_key/1 deletes the private_key" do
       private_key = private_key_fixture()
       assert {:ok, %PrivateKey{}} = Accounts.delete_private_key(private_key)
-      assert_raise Ecto.NoResultsError, fn -> Accounts.get_private_key!(private_key.id) end
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_private_key(private_key.id) end
     end
 
     test "change_private_key/1 returns a private_key changeset" do

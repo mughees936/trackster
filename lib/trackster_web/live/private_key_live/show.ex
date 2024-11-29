@@ -13,7 +13,7 @@ defmodule TracksterWeb.PrivateKeyLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:private_key, Accounts.get_private_key!(id))}
+     |> assign(:private_key, Accounts.get_private_key(id))}
   end
 
   defp page_title(:show), do: "Show Private key"

@@ -401,10 +401,10 @@ defmodule Trackster.Accounts do
 
   ## Examples
 
-      iex> get_private_key!(123)
+      iex> get_private_key(123)
       %PrivateKey{}
 
-      iex> get_private_key!(456)
+      iex> get_private_key(456)
       ** (Ecto.NoResultsError)
 
   """
